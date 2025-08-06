@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bike Price Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f8ff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .form-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .prediction-box {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        @media (max-width: 576px) {
+            .form-card {
+                padding: 1.5rem;
+            }
+
+            .form-label {
+                font-size: 0.95rem;
+            }
+
+            input,
+            select {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="form-card">
+            <h2 class="text-center mb-4">🏍️ Bike Price Prediction</h2>
+            <form action="{{ url_for('predict') }}" method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label">Brand</label>
+                    <select class="form-select" name="brand_name" required>
+                        <option value="" disabled selected>Choose your brand</option>
+                        <option value="Royal Enfield">Royal Enfield</option>
+                        <option value="KTM">KTM</option>
+                        <option value="Bajaj">Bajaj</option>
+                        <option value="Harley-Davidson">Harley-Davidson</option>
+                        <option value="Yamaha">Yamaha</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Suzuki">Suzuki</option>
+                        <option value="TVS">TVS</option>
+                        <option value="Kawasaki">Kawasaki</option>
+                        <option value="Hyosung">Hyosung</option>
+                        <option value="Benelli">Benelli</option>
+                        <option value="Mahindra">Mahindra</option>
+                        <option value="Triumph">Triumph</option>
+                        <option value="Ducati">Ducati</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Rajdoot">Rajdoot</option>
+                        <option value="Indian">Indian</option>
+                        <option value="LML">LML</option>
+                        <option value="Yezdi">Yezdi</option>
+                        <option value="MV">MV</option>
+                        <option value="Ideal">Ideal</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Owner</label>
+                    <select class="form-select" name="owner" required>
+                        <option value="1">First owner</option>
+                        <option value="2">Second owner</option>
+                        <option value="3">Third owner</option>
+                        <option value="4">Fourth owner</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Age (in years)</label>
+                    <input type="number" step="0.1" name="age" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Power (in bhp)</label>
+                    <input type="number" step="0.1" name="power" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">KMs Driven</label>
+                    <input type="number" name="kms_driven" class="form-control" required>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">🔍 Predict Price</button>
+                </div>
+            </form>
+
+            {% if prediction %}
+            <div class="prediction-box alert alert-info mt-4">
+                <h4>Predicted Price: ₹{{ prediction }}</h4>
+            </div>
+            {% endif %}
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2024 Bike Price Predictor
+    </footer>
+
+</body>
+
+</html>
